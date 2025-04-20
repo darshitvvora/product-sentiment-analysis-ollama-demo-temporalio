@@ -1,5 +1,5 @@
 {
-  "name": "product-sentiment-analysis-ollama",
+  "name": "product-sentiment-analysis-ollama-demo-temporalio",
   "version": "1.0.0",
   "description": "A temporal workflow demo for product sentiment analysis with GenAI",
   "main": "src/index.js",

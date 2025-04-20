@@ -335,7 +335,7 @@ You can import the following Postman collection to quickly test the API:
     }
   ]
 }
-
+```
 ## Error Handling
 
 - Comprehensive error handling at all levels:

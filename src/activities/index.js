@@ -93,9 +93,9 @@ async function scrapeReviews(productName) {
 
 async function analyzeSentiment(review) {
   try {
-    // Call local Ollama instance with llama2 model
-    const response = await post(`http://localhost:11434/api/generate`, {
-      model: `llama3.2`,
+    // Call Ollama instance with model from environment variables
+    const response = await post(process.env.OLLAMA_API_URL || 'http://localhost:11434/api/generate', {
+      model: process.env.OLLAMA_MODEL || 'llama3.2',
       prompt: `Analyze the sentiment of this review and return a score between 0 (very negative) and 10 (very positive): "${review.text}. Give out only score number and no explaination in output"`,
       stream: false
     });
@@ -136,10 +136,8 @@ async function storeProductInDB(productName) {
     //random product uuid generator
     const productUUID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-    console.log("here1")
     // Store in Redis
     await redisClient.set(`${productUUID}`, `${productName}`);
-    console.log("here2")
 
     return productUUID;
  

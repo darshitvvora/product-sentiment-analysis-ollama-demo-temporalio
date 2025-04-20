@@ -16,13 +16,13 @@ async function run() {
     const worker = await Worker.create({
       workflowsPath: require.resolve('./workflows/sentimentAnalysis.workflow'),
       activities,
-      taskQueue: process.env.TEMPORAL_TASKQ|| 'sentiment-analysis',
+      taskQueue: process.env.TEMPORAL_TASKQ || 'sentiment-analysis',
       namespace: process.env.TEMPORAL_NAMESPACE || 'default',
 
       // Maximum time for a single workflow task execution
-      startToCloseTimeout: '4s',
+      startToCloseTimeout: process.env.WORKER_START_TO_CLOSE_TIMEOUT || '4s',
       // Maximum time from workflow task scheduling to completion
-      scheduleToCloseTimeout: '5s',
+      scheduleToCloseTimeout: process.env.WORKER_SCHEDULE_TO_CLOSE_TIMEOUT || '5s',
 
       // Concurrency settings
       // Controls how many activities can run simultaneously on this worker (analogy: workers in factory)
@@ -32,18 +32,18 @@ async function run() {
       maxConcurrentWorkflowTaskExecutions: parseInt(process.env.MAX_CONCURRENT_WORKFLOWS, 10) || 50,
   
       // Sticky queue settings. Subsequent tasks for the same workflow are "sticky" - they try to route back to the same worker
-      stickyQueueScheduleToStartTimeout: '1m',
+      stickyQueueScheduleToStartTimeout: process.env.STICKY_QUEUE_SCHEDULE_TO_START_TIMEOUT || '1m',
       
       // Activity timeout settings
-      defaultDeadlineTimeout: '2m',    // Maximum time for activity completion
-      defaultHeartbeatTimeout: '30s',  // Activity heartbeat timeout
+      defaultDeadlineTimeout: process.env.DEFAULT_DEADLINE_TIMEOUT || '2m',    // Maximum time for activity completion
+      defaultHeartbeatTimeout: process.env.DEFAULT_HEARTBEAT_TIMEOUT || '30s',  // Activity heartbeat timeout
   
       // Retry settings for activities
       defaultActivityRetryOptions: {
-        initialInterval: '1s',
-        maximumInterval: '1m',
-        backoffCoefficient: 2,
-        maximumAttempts: 3,
+        initialInterval: process.env.RETRY_INITIAL_INTERVAL || '1s',
+        maximumInterval: process.env.RETRY_MAXIMUM_INTERVAL || '1m',
+        backoffCoefficient: parseFloat(process.env.RETRY_BACKOFF_COEFFICIENT) || 2,
+        maximumAttempts: parseInt(process.env.RETRY_MAXIMUM_ATTEMPTS, 10) || 3,
       }
     });
 

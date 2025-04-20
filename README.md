@@ -359,6 +359,64 @@ You can import the following Postman collection to quickly test the API:
   - API endpoint response times
   - Worker queue statistics
 
+## Environment Variables
+
+The application uses environment variables for configuration. These are loaded from a `.env` file in the root directory. A `.env.example` file is provided as a template.
+
+### Available Environment Variables
+
+```
+# Server Configuration
+PORT=3000
+
+# Redis Configuration
+REDIS_URL=redis://localhost:6379
+
+# Temporal Configuration
+TEMPORAL_NAMESPACE=default
+TEMPORAL_TASKQ=sentiment-analysis
+MAX_CONCURRENT_ACTIVITIES=10
+MAX_CONCURRENT_WORKFLOWS=50
+
+# Temporal Worker Timeouts
+TEMPORAL_SERVER_URL=localhost:7233
+WORKER_START_TO_CLOSE_TIMEOUT=4s
+WORKER_SCHEDULE_TO_CLOSE_TIMEOUT=5s
+STICKY_QUEUE_SCHEDULE_TO_START_TIMEOUT=1m
+DEFAULT_DEADLINE_TIMEOUT=2m
+DEFAULT_HEARTBEAT_TIMEOUT=30s
+
+# Temporal Retry Options
+RETRY_INITIAL_INTERVAL=1s
+RETRY_MAXIMUM_INTERVAL=1m
+RETRY_BACKOFF_COEFFICIENT=2
+RETRY_MAXIMUM_ATTEMPTS=3
+
+
+# Ollama Configuration
+OLLAMA_API_URL=http://localhost:11434/api/generate
+OLLAMA_MODEL=llama3.2
+
+# Logger Configuration
+LOG_LEVEL=info
+ERROR_LOG_PATH=error.log
+COMBINED_LOG_PATH=combined.log
+```
+
+### Setting Up Environment Variables
+
+1. Copy the example environment file:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit the `.env` file to match your environment:
+   ```bash
+   nano .env
+   ```
+
+3. Make sure the `.env` file is loaded at the start of your application. This is already done in the main entry points of the application.
+
 ## Development
 
 1. Start in development mode with auto-reload:
@@ -425,6 +483,11 @@ For support and questions:
 ## Author
 
 This project was created and is maintained by **Darshit Vora**.
+
+
+
+
+
 
 
 

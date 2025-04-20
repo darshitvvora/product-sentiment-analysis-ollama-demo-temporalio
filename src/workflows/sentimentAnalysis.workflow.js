@@ -1,4 +1,6 @@
+
 const { proxyActivities } = require('@temporalio/workflow');
+
 
 const activities = proxyActivities({
   startToCloseTimeout: '10 minutes',

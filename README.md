@@ -96,19 +96,16 @@ The application uses a Temporal workflow architecture with four main activities:
    - Sets up initial data structures
 
 2. **Review Scraping**:
-   - Fetches product reviews from online sources
-   - Handles rate limiting and pagination
-   - Validates and sanitizes review data
+   - Fetches product reviews from online sources (simulation)
 
 3. **Sentiment Analysis**:
    - Processes reviews using Llama 3.2 model via Ollama
    - Extracts sentiment scores and key phrases
-   - Handles batch processing for efficiency
 
 4. **Score Calculation**:
    - Aggregates individual review sentiments
    - Calculates weighted average scores
-   - Stores results in Redis with TTL
+   - Stores results in Redis
 
 ### Workflow Execution Flow
 

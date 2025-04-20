@@ -28,21 +28,15 @@ Product Sentiment Analysis is a demo service that helps businesses understand cu
 
 ## Why Temporal Workflows?
 
-Temporal is a workflow orchestration platform that provides significant advantages for applications like this sentiment analysis service:
+Temporal is a workflow orchestration platform that provides significant advantages for this sentiment analysis service:
 
-### Reliability Through Durable Execution
+### Reliability and Durability
 
-Suppose we deploy this on public cloud like AWS with scalable architecture, them this traditional distributed systems may face numerous challenges when executing multi-step processes:
-- Network failures during API calls to external services
-- Process crashes during long-running operations
-- Timeouts when calling LLM services under high load
-- Lost work when servers restart
-
-**Temporal solves these problems** by providing durable execution guarantees. Each step in our sentiment analysis process (product registration,review scraping, LLM analysis, score calculation) is recorded in Temporal's event history. If any step fails, Temporal automatically retries from the exact point of failure without losing progress.
+Traditional distributed systems face challenges like network failures, process crashes, and timeouts when executing multi-step processes. Temporal solves these by providing durable execution guarantees - each step in our sentiment analysis process is recorded, and if any step fails, Temporal automatically retries from the exact point of failure without losing progress.
 
 ### Workflow as Code
 
-Our sentiment analysis process is expressed as a simple, linear 4-step workflow in code:
+Our sentiment analysis process is expressed as a simple, linear workflow:
 
 ```javascript
 async function productSentimentWorkflow(productName) {
@@ -62,32 +56,26 @@ async function productSentimentWorkflow(productName) {
 }
 ```
 
-This code is both the definition of the workflow and its implementation. There's no need for separate workflow configuration files or complex state machines.
+This code serves as both the definition and implementation of the workflow, eliminating the need for separate configuration files or complex state machines.
 
-### Distributed System Challenges Solved
+### Key Benefits
 
-Temporal addresses key distributed system challenges that would otherwise require complex custom solutions:
+- **Automatic Retries**: Configurable retry policies with exponential backoff
+- **Timeout Management**: Prevents indefinite waiting on external services
+- **Scalability**: Workers can be scaled independently to handle increased load
+- **Visibility**: Web UI provides real-time monitoring and debugging
+- **Versioning**: Code can be updated while maintaining compatibility with running workflows
 
-1. **Activity Retries**: Each activity has configurable retry policies with exponential backoff, handling transient failures automatically.
-
-2. **Timeouts**: Activities have configurable timeouts to prevent indefinite waiting on external services.
-
-3. **Scalability**: Workers can be scaled independently to handle increased load.
-
-4. **Visibility**: The Temporal Web UI provides real-time visibility into workflow execution, making debugging and monitoring straightforward.
-
-5. **Versioning**: Workflow code can be updated while maintaining compatibility with running workflows.
-
-### Comparison with Alternative Approaches
+### Comparison with Alternatives
 
 | Approach | Drawbacks |
 |----------|-----------|
-| **Cron Jobs** | No automatic retries, poor visibility, difficult to coordinate multiple steps |
-| **Message Queues** | Complex error handling, no built-in workflow state, difficult to implement retries |
-| **Custom State Machines** | High development overhead, difficult to maintain, limited visibility |
-| **Serverless Functions** | Timeout limitations, no built-in state management, complex orchestration |
+| **Cron Jobs** | No automatic retries, poor visibility, difficult coordination |
+| **Message Queues** | Complex error handling, no built-in workflow state |
+| **Custom State Machines** | High development overhead, difficult maintenance |
+| **Serverless Functions** | Timeout limitations, complex orchestration |
 
-Temporal provides a comprehensive solution that addresses all these challenges in a developer-friendly way.
+Temporal provides a comprehensive solution to these challenges in a developer-friendly way.
 
 ## Features
 
@@ -437,6 +425,7 @@ For support and questions:
 ## Author
 
 This project was created and is maintained by **Darshit Vora**.
+
 
 
 

@@ -1,0 +1,33 @@
+{
+  "name": "product-sentiment-analysis-ollama",
+  "version": "1.0.0",
+  "description": "A temporal workflow demo for product sentiment analysis with GenAI",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "author": "Darshit Vora",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest",
+    "dev": "nodemon src/index.js",
+    "worker": "node src/worker.js",
+    "redis": "redis-server",
+    "temporal-server-dev": "temporal server start-dev",
+    "ollama": "ollama run llama3.2"
+  },
+  "dependencies": {
+    "@temporalio/activity": "^1.8.4",
+    "@temporalio/client": "^1.8.4",
+    "@temporalio/worker": "^1.8.4",
+    "@temporalio/workflow": "^1.8.4",
+    "axios": "^1.6.2",
+    "dompurify": "^3.2.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "redis": "^4.6.10",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1"
+  }
+}

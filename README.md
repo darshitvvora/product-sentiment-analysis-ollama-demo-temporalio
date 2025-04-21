@@ -79,7 +79,7 @@ Temporal provides a comprehensive solution to these challenges in a developer-fr
 
 ## Features
 
-- Scrapes product reviews from online sources
+- Scrapes product reviews from online sources (right now its fake simulation implementation can be changed to scrape from API)
 - Performs sentiment analysis using Llama 3.2 (via Ollama)
 - Calculates and stores average sentiment scores in Redis
 - Provides API endpoints to trigger analysis and retrieve results
@@ -96,7 +96,7 @@ The application uses a Temporal workflow architecture with four main activities:
    - Sets up initial data structures
 
 2. **Review Scraping**:
-   - Fetches product reviews from online sources (simulation)
+   - Fetches product reviews from online sources (fake simulation)
 
 3. **Sentiment Analysis**:
    - Processes reviews using Llama 3.2 model via Ollama

@@ -3,7 +3,8 @@ const { proxyActivities } = require('@temporalio/workflow');
 
 
 const activities = proxyActivities({
-  startToCloseTimeout: '10 minutes',
+  scheduleToCloseTimeout: '10 minutes', // timeout 1st execution + retries
+  startToCloseTimeout: '2 minutes', // timeout for 1 instance
   activities: {
     storeProductInDB: () => '',
     scrapeReviews: () => '',
